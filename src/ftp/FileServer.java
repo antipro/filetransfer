@@ -96,7 +96,7 @@ class UserThread extends Thread {
 					File file = new File(this.folder, fileName);
 					if (file.exists() && !file.isDirectory()) {
 						out.println(Instructions.FILE_EXISTED);
-						int packet_number = FileProcess.packetNumber(file);
+						int packet_number = FileUtils.packetNumber(file);
 						out.println(packet_number);
 						tf = new TransferThread(file);
 						out.println(tf.getPORT());

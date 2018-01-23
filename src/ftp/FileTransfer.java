@@ -44,7 +44,7 @@ public final class FileTransfer {
 			DatagramPacket dp = new DatagramPacket(buf, buf.length); // 预留50字节的空间放置序号
 			ds.setSoTimeout(5000); // 五秒内无信号重新发送
 			// 生成包含全文内容的向量
-			byte[][] filebuf = FileProcess.openFile(file);
+			byte[][] filebuf = FileUtils.openFile(file);
 			while (unsended) {
 				// 接受状态信息
 				ds.receive(dp);
@@ -85,12 +85,12 @@ public final class FileTransfer {
 			byte[][] truecontents = new byte[packet_number][];
 
 			label1: while (!line_requested.toString().equals("[]")) {
-				ds.send(Dgram.toDatagram(FileProcess.requestedLine(line_requested), addr, PORT));
+				ds.send(Dgram.toDatagram(FileUtils.requestedLine(line_requested), addr, PORT));
 				while (true) {
 					try {
 						ds.receive(dp);
 						contents = dp.getData();
-						FileProcess.parseContent(line_requested, contents, truecontents);
+						FileUtils.parseContent(line_requested, contents, truecontents);
 					} catch (SocketTimeoutException e1) {
 						// e1.printStackTrace();
 						continue label1;
@@ -99,7 +99,7 @@ public final class FileTransfer {
 			}
 			System.out.println(line_requested);
 			// 保存文件
-			FileProcess.storeFile(filename, truecontents);
+			FileUtils.storeFile(filename, truecontents);
 			return true;
 		} catch (SocketException e) {
 			e.printStackTrace();

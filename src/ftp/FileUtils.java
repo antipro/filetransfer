@@ -12,7 +12,7 @@ import java.util.Vector;
 /**
  * 2009-11-3 文件处理类 一个文件行是指一个包含文件某段内容的字节数组，形式一般为<行号:字节数?实际内容>， 不包括尖括号
  */
-public final class FileProcess {
+public final class FileUtils {
 	/**
 	 * 将接受到的内容contents按照自带的行号添加进二维数组filebuf，并将仍要求发送的文件 行的状况以line_requested方式返回
 	 * @param line_requested 仍然要求发送的行的向量
