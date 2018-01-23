@@ -1,7 +1,7 @@
 /*
  * @author antipro
- * ´´½¨ÓÚ 2009-10-23
- * ÎÄ¼ş¿Í»§¶Ë
+ * åˆ›å»ºäº 2009-10-23
+ * æ–‡ä»¶å®¢æˆ·ç«¯
  */
 package ftp;
 
@@ -9,7 +9,7 @@ import java.io.*;
 import java.net.*;
 
 /**
- * 2009-10-23 ¿Í»§¶Ë³ÌĞò
+ * 2009-10-23 å®¢æˆ·ç«¯ç¨‹åº
  */
 public class FileClient {
 
@@ -28,7 +28,7 @@ public class FileClient {
 			BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
 
 			String s = new String();
-			// ½»»¥¹ı³Ì£¬¶ÁÈ¡²¢·µ»Ø,Ö±µ½ÊÕµ½READYÎªÖ¹¡£
+			// äº¤äº’è¿‡ç¨‹ï¼Œè¯»å–å¹¶è¿”å›,ç›´åˆ°æ”¶åˆ°READYä¸ºæ­¢ã€‚
 			while (true) {
 				s = in.readLine();
 				if (s.equals(Instructions.READY))
@@ -50,11 +50,11 @@ public class FileClient {
 				}
 					break;
 				case Instructions.FILE_EXISTED: {
-					// ÎÄ¼ş·Ö¿éÊıÁ¿
+					// æ–‡ä»¶åˆ†å—æ•°é‡
 					int packet_number = Integer.parseInt(in.readLine());
-					// Ö¸¶¨¶Ë¿ÚºÅ
+					// æŒ‡å®šç«¯å£å·
 					int PORT = Integer.parseInt(in.readLine());
-					// ¿ªÊ¼´«Êä
+					// å¼€å§‹ä¼ è¾“
 					FileTransfer filetransfer = new FileTransfer();
 					filetransfer.filename = file_chosed_name;
 					boolean success = filetransfer.receiveFile(socket.getInetAddress(), packet_number, PORT);

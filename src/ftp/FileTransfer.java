@@ -1,7 +1,7 @@
 /*
  * @author antipro
- * ´´½¨ÓÚ 2009-10-24
- * ÎÄ¼ş´«ÊäÀà
+ * åˆ›å»ºäº 2009-10-24
+ * æ–‡ä»¶ä¼ è¾“ç±»
  */
 package ftp;
 
@@ -10,13 +10,13 @@ import java.util.Vector;
 import java.io.*;
 
 /**
- * 2009-10-24 ÎÄ¼ş´«Êä·½·¨
+ * 2009-10-24 æ–‡ä»¶ä¼ è¾“æ–¹æ³•
  */
 public final class FileTransfer {
 	public int PORT;
-	public boolean unsended = true; // ÉèÖÃÎ´·¢ËÍ±êÖ¾
+	public boolean unsended = true; // è®¾ç½®æœªå‘é€æ ‡å¿—
 	public String filename;
-	public DatagramSocket ds; // ·şÎñÆ÷×¨ÓÃDatagramSocket
+	public DatagramSocket ds; // æœåŠ¡å™¨ä¸“ç”¨DatagramSocket
 
 	/**
 	 * 
@@ -32,26 +32,26 @@ public final class FileTransfer {
 	}
 
 	/**
-	 * ÓÃUDP·½Ê½´«ÊäÎÄ¼ş
-	 * @param file ´ı´«ÊäµÄÎÄ¼ş£¨°üÀ¨Ïà¶ÔÂ·¾¶£©
-	 * @return ´«Êä³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse¡£
+	 * ç”¨UDPæ–¹å¼ä¼ è¾“æ–‡ä»¶
+	 * @param file å¾…ä¼ è¾“çš„æ–‡ä»¶ï¼ˆåŒ…æ‹¬ç›¸å¯¹è·¯å¾„ï¼‰
+	 * @return ä¼ è¾“æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›falseã€‚
 	 * @throws IOException
 	 */
 	public void sendFile(File file) throws IOException {
 		byte[] buf = new byte[5050];
 		try {
 			System.out.println("Start Send: " + file);
-			DatagramPacket dp = new DatagramPacket(buf, buf.length); // Ô¤Áô50×Ö½ÚµÄ¿Õ¼ä·ÅÖÃĞòºÅ
-			ds.setSoTimeout(5000); // ÎåÃëÄÚÎŞĞÅºÅÖØĞÂ·¢ËÍ
-			// Éú³É°üº¬È«ÎÄÄÚÈİµÄÏòÁ¿
+			DatagramPacket dp = new DatagramPacket(buf, buf.length); // é¢„ç•™50å­—èŠ‚çš„ç©ºé—´æ”¾ç½®åºå·
+			ds.setSoTimeout(5000); // äº”ç§’å†…æ— ä¿¡å·é‡æ–°å‘é€
+			// ç”ŸæˆåŒ…å«å…¨æ–‡å†…å®¹çš„å‘é‡
 			byte[][] filebuf = FileProcess.openFile(file);
 			while (unsended) {
-				// ½ÓÊÜ×´Ì¬ĞÅÏ¢
+				// æ¥å—çŠ¶æ€ä¿¡æ¯
 				ds.receive(dp);
 				String[] request_lines = Dgram.toString(dp).split(",");
 				// System.out.println(Dgram.toString(dp));
 				for (int i = 0; i < request_lines.length; i++) {
-					// ½«ĞèÒª·¢ËÍµÄ°ü·¢ËÍ³öÈ¥
+					// å°†éœ€è¦å‘é€çš„åŒ…å‘é€å‡ºå»
 					int line_number = Integer.parseInt(request_lines[i].trim());
 					ds.send(Dgram.toDatagram(filebuf[line_number], dp.getAddress(), dp.getPort()));
 				}
@@ -64,10 +64,10 @@ public final class FileTransfer {
 	}
 
 	/**
-	 * ÓÃUDP·½Ê½½ÓÊÕÎÄ¼ş
-	 * @param LocalPORT ×¼±¸µÄ±¾µØ¶Ë¿Ú
-	 * @param addr ·şÎñÆ÷µØÖ·
-	 * @param packet_number °üµÄÊıÁ¿
+	 * ç”¨UDPæ–¹å¼æ¥æ”¶æ–‡ä»¶
+	 * @param LocalPORT å‡†å¤‡çš„æœ¬åœ°ç«¯å£
+	 * @param addr æœåŠ¡å™¨åœ°å€
+	 * @param packet_number åŒ…çš„æ•°é‡
 	 * @throws IOException
 	 */
 	public boolean receiveFile(InetAddress addr, int packet_number, int PORT) throws IOException {
@@ -76,7 +76,7 @@ public final class FileTransfer {
 			byte[] buf = new byte[5050];
 			DatagramPacket dp = new DatagramPacket(buf, buf.length);
 			ds.setSoTimeout(1000);
-			// ½ÓÊÜUDP°ü
+			// æ¥å—UDPåŒ…
 			Vector<String> line_requested = new Vector<String>();
 			for (int i = 0; i < packet_number; i++) {
 				line_requested.add(Integer.toString(i));
@@ -98,7 +98,7 @@ public final class FileTransfer {
 				}
 			}
 			System.out.println(line_requested);
-			// ±£´æÎÄ¼ş
+			// ä¿å­˜æ–‡ä»¶
 			FileProcess.storeFile(filename, truecontents);
 			return true;
 		} catch (SocketException e) {

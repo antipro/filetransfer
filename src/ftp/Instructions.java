@@ -1,43 +1,43 @@
 package ftp;
 
 /**
- * Ğ­ÒéÖ¸Áî¼¯
+ * åè®®æŒ‡ä»¤é›†
  * @author antipro
  */
 public class Instructions {
 	
-	// ·şÎñ¶ËÖ¸Áî¼¯
+	// æœåŠ¡ç«¯æŒ‡ä»¤é›†
 
 	/**
-	 * ·şÎñÆ÷×¼±¸¾ÍĞ÷
+	 * æœåŠ¡å™¨å‡†å¤‡å°±ç»ª
 	 */
 	public static final String READY = "[INSTRUCTION] Ready";
 	/**
-	 * ÒªÇóÌá½»ÎÄ¼şÃû
+	 * è¦æ±‚æäº¤æ–‡ä»¶å
 	 */
 	public static final String REQUEST_FILE_NAME = "[INSTRUCTION] Request file name";
 	/**
-	 * ÎÄ¼ş´æÔÚ¿ªÊ¼´«Êä
+	 * æ–‡ä»¶å­˜åœ¨å¼€å§‹ä¼ è¾“
 	 */
 	public static final String FILE_EXISTED = "[INSTRUCTION] File existed";
 	/**
-	 * ÎÄ¼ş²»´æÔÚÒªÇóÖØĞÂÌá½»ÎÄ¼şÃû
+	 * æ–‡ä»¶ä¸å­˜åœ¨è¦æ±‚é‡æ–°æäº¤æ–‡ä»¶å
 	 */
 	public static final String NO_SUCH_FILE = "[INSTRUCTION] No such file";
 	
 
-	// ¿Í»§¶ËÖ¸Áî¼¯
+	// å®¢æˆ·ç«¯æŒ‡ä»¤é›†
 	
 	/**
-	 * ÇëÇóÁĞ³öÄ¿Â¼ÏÂÈ«²¿ÎÄ¼ş
+	 * è¯·æ±‚åˆ—å‡ºç›®å½•ä¸‹å…¨éƒ¨æ–‡ä»¶
 	 */
 	public static final String REQUEST_FILE_LIST = "[INSTRUCTION] Request file list";
 	/**
-	 * Ìá½»ÎÄ¼şÃû³Æ
+	 * æäº¤æ–‡ä»¶åç§°
 	 */
 	public static final String POST_FILE_NAME = "[INSTRUCTION] Post file name";
 	/**
-	 * ÎÄ¼ş´«ÊäÍê±ÏÒªÇó¹Ø±ÕÁ´½Ó
+	 * æ–‡ä»¶ä¼ è¾“å®Œæ¯•è¦æ±‚å…³é—­é“¾æ¥
 	 */
 	public static final String DONE = "[INSTRUCTION] Done";
 

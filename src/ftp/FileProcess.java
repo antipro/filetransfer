@@ -1,7 +1,7 @@
 /*
  * @author antipro
- * ´´½¨ÓÚ 2009-11-3
- * Ïà¹ØµÄÎÄ¼ş´¦ÀíÀà
+ * åˆ›å»ºäº 2009-11-3
+ * ç›¸å…³çš„æ–‡ä»¶å¤„ç†ç±»
  * 
  */
 package ftp;
@@ -10,39 +10,39 @@ import java.io.*;
 import java.util.Vector;
 
 /**
- * 2009-11-3 ÎÄ¼ş´¦ÀíÀà Ò»¸öÎÄ¼şĞĞÊÇÖ¸Ò»¸ö°üº¬ÎÄ¼şÄ³¶ÎÄÚÈİµÄ×Ö½ÚÊı×é£¬ĞÎÊ½Ò»°ãÎª<ĞĞºÅ:×Ö½ÚÊı?Êµ¼ÊÄÚÈİ>£¬ ²»°üÀ¨¼âÀ¨ºÅ
+ * 2009-11-3 æ–‡ä»¶å¤„ç†ç±» ä¸€ä¸ªæ–‡ä»¶è¡Œæ˜¯æŒ‡ä¸€ä¸ªåŒ…å«æ–‡ä»¶æŸæ®µå†…å®¹çš„å­—èŠ‚æ•°ç»„ï¼Œå½¢å¼ä¸€èˆ¬ä¸º<è¡Œå·:å­—èŠ‚æ•°?å®é™…å†…å®¹>ï¼Œ ä¸åŒ…æ‹¬å°–æ‹¬å·
  */
 public final class FileProcess {
 	/**
-	 * ½«½ÓÊÜµ½µÄÄÚÈİcontents°´ÕÕ×Ô´øµÄĞĞºÅÌí¼Ó½ø¶şÎ¬Êı×éfilebuf£¬²¢½«ÈÔÒªÇó·¢ËÍµÄÎÄ¼ş ĞĞµÄ×´¿öÒÔline_requested·½Ê½·µ»Ø
-	 * @param line_requested ÈÔÈ»ÒªÇó·¢ËÍµÄĞĞµÄÏòÁ¿
-	 * @param contents ½ÓÊÜµ½µÄ½âÎöÇ°µÄ×Ö½ÚÊı×é
-	 * @param truecontents ½âÎöºóµÄ¶şÎ¬Êı×é ËµÃ÷£ºcontentsµÄ¸ñÊ½ ĞĞºÅ:×Ö½ÚÊı?Êµ¼ÊÄÚÈİ ÀıÈç£º
+	 * å°†æ¥å—åˆ°çš„å†…å®¹contentsæŒ‰ç…§è‡ªå¸¦çš„è¡Œå·æ·»åŠ è¿›äºŒç»´æ•°ç»„filebufï¼Œå¹¶å°†ä»è¦æ±‚å‘é€çš„æ–‡ä»¶ è¡Œçš„çŠ¶å†µä»¥line_requestedæ–¹å¼è¿”å›
+	 * @param line_requested ä»ç„¶è¦æ±‚å‘é€çš„è¡Œçš„å‘é‡
+	 * @param contents æ¥å—åˆ°çš„è§£æå‰çš„å­—èŠ‚æ•°ç»„
+	 * @param truecontents è§£æåçš„äºŒç»´æ•°ç»„ è¯´æ˜ï¼šcontentsçš„æ ¼å¼ è¡Œå·:å­—èŠ‚æ•°?å®é™…å†…å®¹ ä¾‹å¦‚ï¼š
 	 *          25:5000:xxxxxxx...xxxxxx
 	 */
 	public static void parseContent(Vector<String> line_requested, byte[] contents, byte[][] filebuf) {
-		// »ñµÃĞĞºÅ
+		// è·å¾—è¡Œå·
 		int index_length = search(contents, (byte) ':');
 		byte[] index_byte = new byte[index_length];
 		System.arraycopy(contents, 0, index_byte, 0, index_length);
 		int index = Integer.parseInt(new String(index_byte));
-		// »ñµÃÄÚÈİ³¤¶È
+		// è·å¾—å†…å®¹é•¿åº¦
 		int number_length = search(contents, (byte) '?') - index_length - 1;
 		byte[] number_byte = new byte[number_length];
 		System.arraycopy(contents, index_length + 1, number_byte, 0, number_length);
 		int line_length = Integer.parseInt(new String(number_byte));
 		// System.out.println(line_length);
-		// »ñµÃÕæÕıµÄÄÚÈİ
+		// è·å¾—çœŸæ­£çš„å†…å®¹
 		filebuf[index] = new byte[line_length];
 		System.arraycopy(contents, search(contents, (byte) '?') + 1, filebuf[index], 0, line_length);
-		// É¾³ıÕâÒ»ĞĞ
+		// åˆ é™¤è¿™ä¸€è¡Œ
 		line_requested.remove(Integer.toString(index));
 	}
 
 	/**
-	 * ½«ÎÄ¼ş´ò¿ª²¢½âÎöÎª¶şÎ¬Êı×é
-	 * @param file Òª´ò¿ªµÄÎÄ¼ş
-	 * @return °üº¬ÎÄ¼şÄÚÈİµÄ¶şÎ¬ÏòÁ¿¸ñÊ½Îª ĞĞºÅ:×Ö½ÚÊı?ÄÚÈİ
+	 * å°†æ–‡ä»¶æ‰“å¼€å¹¶è§£æä¸ºäºŒç»´æ•°ç»„
+	 * @param file è¦æ‰“å¼€çš„æ–‡ä»¶
+	 * @return åŒ…å«æ–‡ä»¶å†…å®¹çš„äºŒç»´å‘é‡æ ¼å¼ä¸º è¡Œå·:å­—èŠ‚æ•°?å†…å®¹
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
@@ -70,9 +70,9 @@ public final class FileProcess {
 	}
 
 	/**
-	 * ½«ÊÕµ½µÄ¶şÎ¬Êı×éÖØĞÂ±£´æÎªÎÄ¼ş
-	 * @param filename Òª±£´æµÄÎÄ¼şÃû
-	 * @param filebuf °üº¬ÎÄ¼şÄÚÈİµÄ×Ö·û´®Êı×é
+	 * å°†æ”¶åˆ°çš„äºŒç»´æ•°ç»„é‡æ–°ä¿å­˜ä¸ºæ–‡ä»¶
+	 * @param filename è¦ä¿å­˜çš„æ–‡ä»¶å
+	 * @param filebuf åŒ…å«æ–‡ä»¶å†…å®¹çš„å­—ç¬¦ä¸²æ•°ç»„
 	 * @throws IOException
 	 */
 	public static void storeFile(String filename, byte[][] filebuf) throws IOException {
@@ -84,14 +84,14 @@ public final class FileProcess {
 	}
 
 	/**
-	 * ·µ»Ø´ı´«ÊäÎÄ¼şµÄ°üµÄÊıÁ¿
-	 * @param file Òª¼ÆËã°üÊıÁ¿µÄÎÄ¼ş
-	 * @return °üµÄÊıÁ¿
+	 * è¿”å›å¾…ä¼ è¾“æ–‡ä»¶çš„åŒ…çš„æ•°é‡
+	 * @param file è¦è®¡ç®—åŒ…æ•°é‡çš„æ–‡ä»¶
+	 * @return åŒ…çš„æ•°é‡
 	 */
 	public static int packetNumber(File file) {
-		// »ñÈ¡ÎÄ¼ş³¤¶È
+		// è·å–æ–‡ä»¶é•¿åº¦
 		long file_length = file.length();
-		// Éè¶¨°üµÄÊıÁ¿
+		// è®¾å®šåŒ…çš„æ•°é‡
 		int packet_number = 0;
 		if (file_length % 5000 != 0)
 			packet_number = (int) (file_length / 5000 + 1);
@@ -101,24 +101,24 @@ public final class FileProcess {
 	}
 
 	/**
-	 * ½«ÒÑ¾­½ÓÊÜµÄĞĞµÄÏòÁ¿×ªÎª×Ö·û´®
-	 * @param line_requested ÒÑ¾­½ÓÊÕµÄĞĞµÄÊı×é
+	 * å°†å·²ç»æ¥å—çš„è¡Œçš„å‘é‡è½¬ä¸ºå­—ç¬¦ä¸²
+	 * @param line_requested å·²ç»æ¥æ”¶çš„è¡Œçš„æ•°ç»„
 	 * @return
 	 */
 	public static String requestedLine(Vector<String> line_requested) {
-		// ¸Ã×Ö·û´®µÄ±íÊöĞÎÊ½´óÖÂÎª[1:32:23]ÕâÒ»Àà
+		// è¯¥å­—ç¬¦ä¸²çš„è¡¨è¿°å½¢å¼å¤§è‡´ä¸º[1:32:23]è¿™ä¸€ç±»
 		String request_line = line_requested.toString();
 		if (request_line != "[]")
-			// È¥µôÁ½Í·µÄ·½À¨ºÅ
+			// å»æ‰ä¸¤å¤´çš„æ–¹æ‹¬å·
 			return request_line.substring(1, request_line.length() - 1);
 		return request_line;
 	}
 
 	/**
-	 * ËÑË÷ÎÄ¼şĞĞÖĞ´ú±í¸ÃĞĞ×Ö½ÚÊıÁ¿»òÕßĞĞºÅµÄÊı×Ó
-	 * @param buf ´ıËÑË÷µÄĞĞ
-	 * @param key ÎÄ¼şĞĞÖĞµÄ·Ö¸ô×Ö·û£¬ÕâÀïÊÇ:»òÕß?
-	 * @return ·µ»Ø¸Ã¹Ø¼ü×ÖÔÚĞĞÖĞµÄindex
+	 * æœç´¢æ–‡ä»¶è¡Œä¸­ä»£è¡¨è¯¥è¡Œå­—èŠ‚æ•°é‡æˆ–è€…è¡Œå·çš„æ•°å­
+	 * @param buf å¾…æœç´¢çš„è¡Œ
+	 * @param key æ–‡ä»¶è¡Œä¸­çš„åˆ†éš”å­—ç¬¦ï¼Œè¿™é‡Œæ˜¯:æˆ–è€…?
+	 * @return è¿”å›è¯¥å…³é”®å­—åœ¨è¡Œä¸­çš„index
 	 **/
 	public static int search(byte[] buf, byte key) {
 		for (int i = 0; i < buf.length; i++) {

@@ -1,22 +1,22 @@
 /*
  * @author antipro
- * ´´½¨ÓÚ 2009-10-23
- * ¹¦ÄÜÀà£¬ÒòÎª±àÂëÎÊÌâ£¬ÔİÊ±Ã»ÓÃÉÏ¡£
+ * åˆ›å»ºäº 2009-10-23
+ * åŠŸèƒ½ç±»ï¼Œå› ä¸ºç¼–ç é—®é¢˜ï¼Œæš‚æ—¶æ²¡ç”¨ä¸Šã€‚
  */
 package ftp;
 
 import java.net.*;
 
 /**
- * 2009-10-23 ÊµÏÖDatagramPacketÓëStringµÄ×ª»»
+ * 2009-10-23 å®ç°DatagramPacketä¸Stringçš„è½¬æ¢
  */
 public class Dgram {
 	/**
-	 * ½«×Ö·û´®×ª»»ÎªDatagramPacket
-	 * @param s Òª×ª»»µÄ×Ö·û´®
-	 * @param destIA Ä¿±êµØÖ·
-	 * @param destPort Ä¿±ê¶Ë¿Ú
-	 * @return UDP°ü
+	 * å°†å­—ç¬¦ä¸²è½¬æ¢ä¸ºDatagramPacket
+	 * @param s è¦è½¬æ¢çš„å­—ç¬¦ä¸²
+	 * @param destIA ç›®æ ‡åœ°å€
+	 * @param destPort ç›®æ ‡ç«¯å£
+	 * @return UDPåŒ…
 	 */
 	public static DatagramPacket toDatagram(String s, InetAddress destIA, int destPort) {
 		byte[] buf = new byte[s.length() + 1];
@@ -25,9 +25,9 @@ public class Dgram {
 	}
 
 	/**
-	 * ½«DatagramPacket×ª»»Îª×Ö·û´®
-	 * @param p UDP°ü
-	 * @return ×Ö·û´®
+	 * å°†DatagramPacketè½¬æ¢ä¸ºå­—ç¬¦ä¸²
+	 * @param p UDPåŒ…
+	 * @return å­—ç¬¦ä¸²
 	 */
 	public static String toString(DatagramPacket p) {
 		return new String(p.getData(), 0, p.getLength());

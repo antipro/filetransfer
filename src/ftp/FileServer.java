@@ -1,7 +1,7 @@
 /*
  * @author antipro
- * ´´½¨ÓÚ 2009-10-23
- * ÎÄ¼ş·şÎñÆ÷
+ * åˆ›å»ºäº 2009-10-23
+ * æ–‡ä»¶æœåŠ¡å™¨
  */
 package ftp;
 
@@ -9,7 +9,7 @@ import java.io.*;
 import java.net.*;
 
 /**
- * ÎÄ¼ş´«ÊäÏß³Ì
+ * æ–‡ä»¶ä¼ è¾“çº¿ç¨‹
  **/
 class TransferThread extends Thread {
 	File file;
@@ -39,7 +39,7 @@ class TransferThread extends Thread {
 }
 
 /**
- * µ¥ÓÃ»§ÊØ»¤Ïß³Ì ½¨Á¢Ò»¸öÁ¬½ÓÒÔ±ã·¢ËÍÎÄ¼ş
+ * å•ç”¨æˆ·å®ˆæŠ¤çº¿ç¨‹ å»ºç«‹ä¸€ä¸ªè¿æ¥ä»¥ä¾¿å‘é€æ–‡ä»¶
  */
 class UserThread extends Thread {
 
@@ -65,8 +65,8 @@ class UserThread extends Thread {
 			System.out.println("Connection accepted: " + socket);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 			out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8")), true);
-			// ÇëÇóÊäÈëÓÃ»§ÃûÓëÃÜÂë
-			// ÕıÈ·ºó²Å»áÌø³öÑ­»·
+			// è¯·æ±‚è¾“å…¥ç”¨æˆ·åä¸å¯†ç 
+			// æ­£ç¡®åæ‰ä¼šè·³å‡ºå¾ªç¯
 			while (true) {
 				out.println(REQUEST_USERNAME);
 				if (USERNAME.equals(in.readLine()))
@@ -108,7 +108,7 @@ class UserThread extends Thread {
 				case Instructions.DONE: {
 					if (tf != null)
 						tf.setSended(false);
-					break transaction; // Ìø³öÑ­»·²¢¹Ø±Õ
+					break transaction; // è·³å‡ºå¾ªç¯å¹¶å…³é—­
 				}
 				default:
 					System.out.println(message);
@@ -127,7 +127,7 @@ class UserThread extends Thread {
 }
 
 /**
- * 2009-10-23 ·şÎñÆ÷Ïß³Ì
+ * 2009-10-23 æœåŠ¡å™¨çº¿ç¨‹
  */
 public class FileServer {
 
@@ -159,7 +159,7 @@ public class FileServer {
 				// Blocks until a connection occurs:
 				Socket socket = s.accept();
 				try {
-					// ²úÉúÒ»¸öĞÂµÄÁ¬½Ó
+					// äº§ç”Ÿä¸€ä¸ªæ–°çš„è¿æ¥
 					new UserThread(socket, folder);
 				} catch (IOException e) {
 					// If it fails,close the socket,
