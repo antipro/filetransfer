@@ -48,12 +48,12 @@ public final class FileTransfer {
 			while (unsended) {
 				// 接受状态信息
 				ds.receive(dp);
-				String[] request_lines = Dgram.toString(dp).split(",");
+				String[] request_lines = DgramUtils.toString(dp).split(",");
 				// System.out.println(Dgram.toString(dp));
 				for (int i = 0; i < request_lines.length; i++) {
 					// 将需要发送的包发送出去
 					int line_number = Integer.parseInt(request_lines[i].trim());
-					ds.send(Dgram.toDatagram(filebuf[line_number], dp.getAddress(), dp.getPort()));
+					ds.send(DgramUtils.toDatagram(filebuf[line_number], dp.getAddress(), dp.getPort()));
 				}
 			}
 		} catch (Exception e) {
@@ -85,7 +85,7 @@ public final class FileTransfer {
 			byte[][] truecontents = new byte[packet_number][];
 
 			label1: while (!line_requested.toString().equals("[]")) {
-				ds.send(Dgram.toDatagram(FileUtils.requestedLine(line_requested), addr, PORT));
+				ds.send(DgramUtils.toDatagram(FileUtils.requestedLine(line_requested), addr, PORT));
 				while (true) {
 					try {
 						ds.receive(dp);

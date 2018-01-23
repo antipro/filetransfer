@@ -10,7 +10,7 @@ import java.net.*;
 /**
  * 2009-10-23 实现DatagramPacket与String的转换
  */
-public class Dgram {
+public class DgramUtils {
 	/**
 	 * 将字符串转换为DatagramPacket
 	 * @param s 要转换的字符串
